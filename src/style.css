@@ -27,7 +27,7 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
   background:
     radial-gradient(circle at top left, rgba(245, 201, 201, 0.4), transparent 25%),
     radial-gradient(circle at right, rgba(191, 217, 247, 0.42), transparent 26%),
@@ -188,11 +188,11 @@ button {
 .hero h1 {
   margin: 0;
   max-width: 620px;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
   font-size: clamp(3rem, 6vw, 5.6rem);
   line-height: 0.9;
-  letter-spacing: -0.05em;
-  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-weight: 700;
 }
 
 .hero h1 span {
@@ -578,10 +578,10 @@ button {
 
 .about-panel h3 {
   margin: 0;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
   font-size: clamp(2rem, 4vw, 3rem);
-  letter-spacing: -0.04em;
-  line-height: 1;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .about-panel p {
