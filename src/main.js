@@ -10,10 +10,9 @@ app.innerHTML = `
   <div class="page-shell">
     <header class="topbar">
       <a href="#top" class="brand" aria-label="Ir al inicio">
-        <span class="brand__mark">AFM</span>
+        <span class="brand__mark">GH</span>
         <span class="brand__text">
-          <strong>Araceli Fradejas</strong>
-          <small>Games Hub</small>
+          <strong>Games Hub</strong>
         </span>
       </a>
       <nav class="main-nav" aria-label="Navegación principal">
@@ -44,6 +43,35 @@ app.innerHTML = `
         </div>
 
         <div class="hero__panel" id="scores" aria-label="Resumen general de puntuación">
+          <div class="hero__art" aria-hidden="true">
+            <svg viewBox="0 0 420 260" role="img" aria-label="Ilustración de juegos en estilo lápiz">
+              <path d="M40 175 C 90 140, 120 155, 160 120 S 250 70, 310 115 S 355 150, 380 142" fill="none" stroke="#5f4b4b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.6"/>
+              <path d="M85 190 C 120 160, 150 165, 185 138 S 255 92, 315 140" fill="none" stroke="#b78f77" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 10" opacity="0.7"/>
+              <g transform="translate(56 42)">
+                <rect x="0" y="0" width="92" height="92" rx="20" fill="#fef8ee" stroke="#5f4b4b" stroke-width="2.5"/>
+                <path d="M26 25 h40 M26 46 h40 M26 67 h30" stroke="#5f4b4b" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+                <circle cx="71" cy="63" r="12" fill="none" stroke="#d28f6d" stroke-width="3"/>
+              </g>
+              <g transform="translate(170 38)">
+                <rect x="0" y="0" width="102" height="112" rx="20" fill="#fffaf4" stroke="#5f4b4b" stroke-width="2.5"/>
+                <g stroke="#d28f6d" stroke-width="3" stroke-linecap="round" fill="none">
+                  <path d="M25 25 L55 55 L85 25"/>
+                  <path d="M25 70 L55 40 L85 70"/>
+                  <path d="M25 40 L55 65 L85 40"/>
+                </g>
+              </g>
+              <g transform="translate(295 48)">
+                <path d="M6 60 L48 18 L92 62 L50 98 Z" fill="#f6ece0" stroke="#5f4b4b" stroke-width="2.5"/>
+                <circle cx="50" cy="58" r="16" fill="none" stroke="#c98e7c" stroke-width="3"/>
+                <path d="M50 42 v32 M34 58 h32" stroke="#5f4b4b" stroke-width="3" stroke-linecap="round"/>
+              </g>
+              <g transform="translate(120 150)">
+                <path d="M0 32 C 48 10, 96 10, 147 30" fill="none" stroke="#5f4b4b" stroke-width="2.5" stroke-linecap="round" opacity="0.6"/>
+                <circle cx="26" cy="33" r="15" fill="#f6d5c8"/>
+                <circle cx="116" cy="33" r="15" fill="#dfe9fb"/>
+              </g>
+            </svg>
+          </div>
           <p>Tu tablero de progreso</p>
           <div class="summary-grid">
             <div>
