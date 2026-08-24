@@ -12,7 +12,9 @@ La propuesta consiste en una web de una sola página que integra **tres juegos d
 
 ### Demo
 
-La demo del proyecto se publicará junto con la entrega final del repositorio cuando la aplicación esté desplegada.
+La demo del proyecto está disponible en:
+
+- https://rtc-proyecto-5-games-hub.vercel.app/
 
 ### Funcionalidades
 
@@ -85,7 +87,9 @@ La demo del proyecto se publicará junto con la entrega final del repositorio cu
 
 ### Despliegue
 
-El proyecto se desplegará en **Vercel** cuando esté finalizado y preparado para publicación.
+El proyecto está desplegado en **Vercel** y disponible en la siguiente URL:
+
+- https://rtc-proyecto-5-games-hub.vercel.app/
 
 ### Tecnologías utilizadas
 
@@ -131,7 +135,9 @@ The proposal consists of a one-page website that integrates **three different ga
 
 ### Demo
 
-The project demo will be published together with the final repository delivery once the application is deployed.
+The project demo is live at:
+
+- https://rtc-proyecto-5-games-hub.vercel.app/
 
 ### Features
 
@@ -204,7 +210,9 @@ The project demo will be published together with the final repository delivery o
 
 ### Deployment
 
-The project will be deployed on **Vercel** once it is finished and ready for publication.
+The project is deployed on **Vercel** and available at:
+
+- https://rtc-proyecto-5-games-hub.vercel.app/
 
 ### Technologies used
 
