@@ -89,7 +89,40 @@ app.innerHTML = `
     </main>
 
     <footer class="footer">
-      <p>Games Hub — para jugar un rato y volver con mejor energía.</p>
+      <div class="footer__socials">
+        <p class="footer__title">Síguenos en / Follow us:</p>
+        <div class="footer__links">
+          <a href="https://www.instagram.com/goldilocks1013x/" target="_blank" rel="noreferrer" aria-label="Instagram">Instagram</a>
+          <a href="https://x.com/AraceliFradejas" target="_blank" rel="noreferrer" aria-label="X">X (Twitter)</a>
+          <a href="https://www.tiktok.com/@arucci1" target="_blank" rel="noreferrer" aria-label="TikTok">TikTok</a>
+          <a href="https://www.youtube.com/@aracelifradejasmunoz2758" target="_blank" rel="noreferrer" aria-label="YouTube">YouTube</a>
+          <a href="https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/" target="_blank" rel="noreferrer" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://medium.com/@araceli.fradejas" target="_blank" rel="noreferrer" aria-label="Medium">Medium</a>
+        </div>
+      </div>
+
+      <div class="footer__meta">
+        <p>© 2026 Araceli Fradejas Muñoz</p>
+      </div>
+
+      <div class="footer__note">
+        <p>
+          <strong>NOTA MUY IMPORTANTE:</strong> Esta página es un ejercicio realizado por
+          <strong>Araceli Fradejas Muñoz</strong> como entrega para el
+          <strong>PROYECTO: GAMES HUB</strong>, del <em>"módulo 4: Web Design Advanced"</em>
+          del máster <strong>ROCK THE CODE</strong> de la escuela ThePower / Hackio. Es una
+          web interactiva con varios mini juegos desarrollada con Vite, JavaScript vanilla y Local
+          Storage. No es una aplicación oficial ni un producto comercial.
+        </p>
+        <p>
+          <strong>VERY IMPORTANT NOTE:</strong> This page is an exercise created by
+          <strong>Araceli Fradejas Muñoz</strong> as a submission for the
+          <strong>PROJECT: GAMES HUB</strong>, from <em>"Module 4: Web Design Advanced"</em>
+          of the <strong>ROCK THE CODE</strong> master program at ThePower / Hackio school. It is
+          an interactive web with several mini games built with Vite, vanilla JavaScript and Local
+          Storage. It is not an official application and not a commercial product.
+        </p>
+      </div>
     </footer>
   </div>
 `;
