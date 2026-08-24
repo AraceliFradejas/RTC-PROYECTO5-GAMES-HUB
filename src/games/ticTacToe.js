@@ -37,7 +37,7 @@ const strings = {
   },
 };
 
-function checkWinner(board) {
+export function checkWinner(board) {
   for (const [a, b, c] of winningLines) {
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
       return board[a];
@@ -68,9 +68,12 @@ export function createTicTacToeGame(language = 'es') {
 
   const board = document.createElement('div');
   board.className = 'tic-tac-toe';
+  board.setAttribute('role', 'group');
+  board.setAttribute('aria-label', language === 'es' ? 'Tablero de tres en raya' : 'Tic-tac-toe board');
 
   const status = document.createElement('p');
   status.className = 'game-card__status';
+  status.setAttribute('aria-live', 'polite');
   status.textContent = text.starts;
 
   const scoreBoard = document.createElement('div');
@@ -94,7 +97,10 @@ export function createTicTacToeGame(language = 'es') {
       button.type = 'button';
       button.className = `cell ${cellValue ? 'cell--filled' : ''}`;
       button.setAttribute('data-index', String(index));
-      button.setAttribute('aria-label', `${text.cell} ${index + 1}`);
+      button.setAttribute(
+        'aria-label',
+        cellValue ? `${text.cell} ${index + 1}: ${cellValue}` : `${text.cell} ${index + 1}`,
+      );
       button.textContent = cellValue;
       button.disabled = !gameState.active || Boolean(cellValue);
       button.addEventListener('click', () => makeMove(index));

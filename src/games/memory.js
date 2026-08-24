@@ -12,6 +12,9 @@ const strings = {
     matchFound: 'Pareja encontrada.',
     noMatch: 'No coincide. Inténtalo de nuevo.',
     complete: '¡Lo has completado!',
+    hiddenCard: 'Carta oculta',
+    visibleCard: 'Carta con',
+    matchedCard: 'Pareja encontrada con',
   },
   en: {
     attempts: 'Attempts',
@@ -22,6 +25,9 @@ const strings = {
     matchFound: 'Match found.',
     noMatch: 'No match. Try again.',
     complete: 'You completed it!',
+    hiddenCard: 'Hidden card',
+    visibleCard: 'Card showing',
+    matchedCard: 'Matched card showing',
   },
 };
 
@@ -48,6 +54,8 @@ export function createMemoryGame(language = 'es') {
     solved: 0,
     status: text.searchPairs,
     best: readGameScore('memory', { best: 0 }).best,
+    checkingPair: false,
+    turnId: 0,
   };
 
   const wrapper = document.createElement('div');
@@ -62,9 +70,12 @@ export function createMemoryGame(language = 'es') {
 
   const board = document.createElement('div');
   board.className = 'memory-board';
+  board.setAttribute('role', 'group');
+  board.setAttribute('aria-label', language === 'es' ? 'Tablero de memoria' : 'Memory board');
 
   const status = document.createElement('p');
   status.className = 'game-card__status';
+  status.setAttribute('aria-live', 'polite');
   status.textContent = state.status;
 
   const scoreRow = document.createElement('div');
@@ -81,7 +92,13 @@ export function createMemoryGame(language = 'es') {
       button.type = 'button';
       button.className = `memory-card ${card.flipped || card.matched ? 'is-visible' : ''} ${card.matched ? 'is-matched' : ''}`;
       button.textContent = card.flipped || card.matched ? card.symbol : '?';
-      button.disabled = card.matched || card.flipped;
+      const cardLabel = card.matched
+        ? `${text.matchedCard} ${card.symbol}`
+        : card.flipped
+          ? `${text.visibleCard} ${card.symbol}`
+          : text.hiddenCard;
+      button.setAttribute('aria-label', cardLabel);
+      button.disabled = state.checkingPair || card.matched || card.flipped;
       button.addEventListener('click', () => handleTurn(card.id));
       board.appendChild(button);
     });
@@ -106,7 +123,7 @@ export function createMemoryGame(language = 'es') {
 
   function handleTurn(cardId) {
     const selectedCard = state.deck.find((card) => card.id === cardId);
-    if (!selectedCard || selectedCard.flipped || selectedCard.matched) return;
+    if (state.checkingPair || !selectedCard || selectedCard.flipped || selectedCard.matched) return;
 
     selectedCard.flipped = true;
     state.opened.push(selectedCard);
@@ -127,11 +144,15 @@ export function createMemoryGame(language = 'es') {
           updateStatus(text.complete);
         }
       } else {
+        state.checkingPair = true;
+        const currentTurnId = state.turnId;
         updateStatus(text.noMatch);
         setTimeout(() => {
+          if (currentTurnId !== state.turnId) return;
           first.flipped = false;
           second.flipped = false;
           state.opened = [];
+          state.checkingPair = false;
           renderBoard();
         }, 600);
       }
@@ -141,6 +162,7 @@ export function createMemoryGame(language = 'es') {
   }
 
   function resetGame() {
+    state.turnId += 1;
     state.deck = shuffle([...emojiPool, ...emojiPool]).map((symbol, index) => ({
       id: `${symbol}-${index}`,
       symbol,
@@ -150,6 +172,7 @@ export function createMemoryGame(language = 'es') {
     state.opened = [];
     state.moves = 0;
     state.solved = 0;
+    state.checkingPair = false;
     state.status = text.searchPairs;
     renderBoard();
     updateStatus(state.status);

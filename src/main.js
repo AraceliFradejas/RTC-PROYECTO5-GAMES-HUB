@@ -3,6 +3,7 @@ import { games, translations } from './data.js';
 import { createTicTacToeGame } from './games/ticTacToe.js';
 import { createMemoryGame } from './games/memory.js';
 import { createRpsGame } from './games/rps.js';
+import { readAllScores } from './storage.js';
 
 const app = document.querySelector('#app');
 const slotMap = {
@@ -72,7 +73,7 @@ function renderApp() {
 
           <div class="hero__panel" id="scores" aria-label="${lang === 'es' ? 'Resumen general de puntuación' : 'Overall score summary'}">
             <div class="hero__art" aria-hidden="true">
-              <svg viewBox="0 0 420 260" role="img" aria-label="${lang === 'es' ? 'Ilustración de juegos en estilo lápiz' : 'Sketch-style games illustration'}">
+              <svg viewBox="0 0 420 260">
                 <path d="M40 175 C 90 140, 120 155, 160 120 S 250 70, 310 115 S 355 150, 380 142" fill="none" stroke="#5f4b4b" stroke-width="3" stroke-linecap="round" stroke-dasharray="6 8" opacity="0.6"/>
                 <path d="M85 190 C 120 160, 150 165, 185 138 S 255 92, 315 140" fill="none" stroke="#b78f77" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 10" opacity="0.7"/>
                 <g transform="translate(56 42)">
@@ -101,7 +102,7 @@ function renderApp() {
               </svg>
             </div>
             <p>${lang === 'es' ? 'Tu tablero de progreso' : 'Your progress board'}</p>
-            <div class="summary-grid">
+            <div class="summary-grid" aria-live="polite">
               <div>
                 <span class="summary-label">${text.summary.tictactoe}</span>
                 <strong data-summary="tictactoe">0</strong>
@@ -167,18 +168,9 @@ function renderApp() {
         </div>
 
         <div class="footer__note">
-          <p>
-            <strong>${lang === 'es' ? 'NOTA IMPORTANTE:' : 'IMPORTANT NOTE:'}</strong>
-            ${lang === 'es'
-              ? 'Estoy aprendiendo programación y esto lo hago para divertirme durante las vacaciones. Es un proyecto personal, creativo y experimental dentro del módulo "Web Design Advanced" de ThePower Tech. No es una aplicación oficial ni un producto comercial, sino una forma de practicar, aprender y disfrutar haciendo cosas con código.'
-              : 'I am learning programming and I am doing this to have fun during my holidays. This is a personal, creative and experimental project for the "Web Design Advanced" module at ThePower Tech. It is not an official app or a commercial product, but a way to practice, learn and enjoy creating things with code.'}
-          </p>
-          <p>
-            <strong>${lang === 'es' ? 'IMPORTANT NOTE:' : 'NOTA IMPORTANTE:'}</strong>
-            ${lang === 'es'
-              ? 'I am learning programming and I am doing this to have fun during my holidays. This is a personal, creative and experimental project for the "Web Design Advanced" module at ThePower Tech. It is not an official app or a commercial product, but a way to practice, learn and enjoy creating things with code.'
-              : 'Estoy aprendiendo programación y esto lo hago para divertirme durante las vacaciones. Es un proyecto personal, creativo y experimental dentro del módulo "Web Design Advanced" de ThePower Tech. No es una aplicación oficial ni un producto comercial, sino una forma de practicar, aprender y disfrutar haciendo cosas con código.'}
-          </p>
+          <p>${lang === 'es'
+            ? 'Proyecto realizado para practicar lógica de programación, manipulación del DOM y persistencia de datos con JavaScript vanilla.'
+            : 'A project made to practise programming logic, DOM manipulation and data persistence with vanilla JavaScript.'}</p>
         </div>
       </footer>
     </div>
@@ -201,7 +193,7 @@ function renderApp() {
 }
 
 function updateSummary() {
-  const stored = JSON.parse(localStorage.getItem('gamesHubScores') || '{}');
+  const stored = readAllScores();
 
   const tictactoe = stored.tictactoe || { X: 0, O: 0, draws: 0 };
   const memory = stored.memory || { best: 0 };
@@ -225,5 +217,6 @@ function updateSummary() {
 }
 
 window.addEventListener('storage', updateSummary);
+window.addEventListener('scoresupdated', updateSummary);
 renderApp();
 updateSummary();

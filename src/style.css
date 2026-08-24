@@ -635,9 +635,20 @@ button {
 .button:hover,
 .mini-button:hover,
 .memory-card:hover,
-.cell:hover {
+.cell:not(:disabled):hover {
   transform: translateY(-2px) scale(1.01);
   box-shadow: 0 12px 24px rgba(92, 78, 69, 0.08);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #6f5bb5;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  transform: none;
+  box-shadow: none;
 }
 
 .about-section {
@@ -822,5 +833,49 @@ button {
 
   .cell {
     min-height: 68px;
+  }
+
+  .game-card,
+  .hero__panel,
+  .about-panel {
+    border-radius: 20px;
+  }
+
+  .game-card {
+    padding: 14px;
+  }
+
+  .game-card__description {
+    min-height: 0;
+  }
+
+  .memory-board,
+  .rps-controls,
+  .score-row {
+    gap: 7px;
+  }
+
+  .rps-button {
+    min-width: 0;
+    padding-inline: 4px;
+  }
+
+  .rps-button span,
+  .score-chip span {
+    letter-spacing: 0.03em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

@@ -19,6 +19,7 @@ export function readAllScores() {
 export function writeAllScores(scores) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(scores));
+    window.dispatchEvent(new CustomEvent('scoresupdated'));
   } catch {
     // Ignore if storage is disabled in the browser.
   }

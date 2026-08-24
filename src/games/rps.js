@@ -35,7 +35,7 @@ const strings = {
   },
 };
 
-function getWinner(player, machine) {
+export function getWinner(player, machine) {
   if (player === machine) return 'draw';
   const wins = {
     rock: 'scissors',
@@ -58,6 +58,7 @@ export function createRpsGame(language = 'es') {
 
   const result = document.createElement('p');
   result.className = 'game-card__status';
+  result.setAttribute('aria-live', 'polite');
   result.textContent = text.chooseMove;
 
   const scoreBoard = document.createElement('div');

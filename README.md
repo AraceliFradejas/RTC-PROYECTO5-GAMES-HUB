@@ -1,245 +1,86 @@
 # Games Hub
 
-## Versión en castellano
+Games Hub es mi proyecto final del módulo **Web Design Advanced** de ThePower. La propuesta consiste en reunir tres juegos hechos con JavaScript vanilla en una sola página: tres en raya, memoria visual y piedra, papel o tijera.
 
-Proyecto académico desarrollado dentro del máster de ThePower TECH, en el módulo de **Web Design Advanced**. La idea principal de este trabajo es crear una página única con varios mini juegos en JavaScript vanilla, combinando lógica, usabilidad y un diseño atractivo en una experiencia 100% responsive.
+Quise darles una estética tranquila y colorida, alejada de la apariencia habitual de una web arcade. El reto principal ha sido controlar el estado de cada partida, actualizar el DOM sin recargar la página y conservar las puntuaciones entre sesiones.
 
-### Proyecto académico
+## Demo
 
-Este ejercicio forma parte de la entrega del proyecto final del **Módulo 4: Web Design Advanced**, dentro del máster de ThePower TECH. El proyecto se desarrollará con **Vite** y **JavaScript vanilla**, aplicando una estructura modular, buenas prácticas de programación y una organización clara del código para facilitar el mantenimiento y la escalabilidad.
+[Ver Games Hub en Vercel](https://rtc-proyecto-5-games-hub.vercel.app/)
 
-La propuesta consiste en una web de una sola página que integra **tres juegos distintos** en secciones independientes. Uno de ellos será un **tres en raya** obligatorio, mientras que los otros dos serán elegidos según la temática y la creatividad del proyecto. La experiencia se enfocará en ofrecer una interfaz moderna, rápida y accesible, con buena maquetación y diseño pensado para dispositivos móviles, tablets y escritorio.
+## Juegos
 
-### Demo
+- **Tres en raya:** partida local para dos jugadores. Guarda las victorias de X, las victorias de O y los empates.
+- **Memoria visual:** tablero de 16 cartas. Guarda como récord la partida completada con menos intentos.
+- **Piedra, papel o tijera:** partidas contra una elección aleatoria del navegador. Guarda victorias, derrotas y empates.
 
-La demo del proyecto está disponible en:
+El panel situado al principio de la página muestra un resumen de la actividad y se actualiza mientras se juega. Las puntuaciones se almacenan en `localStorage`, por lo que siguen disponibles después de recargar.
 
-- https://rtc-proyecto-5-games-hub.vercel.app/
+## Decisiones del proyecto
 
-### Funcionalidades
+- Separé cada juego en su propio módulo para que cada uno gestione su estado y sus eventos.
+- Centralicé la lectura y escritura de puntuaciones en `storage.js`.
+- Utilicé CSS Grid para los tableros y para adaptar la distribución a escritorio, tablet y móvil.
+- Añadí una versión en inglés para practicar el renderizado dinámico de contenido.
+- El juego de memoria bloquea el tablero mientras compara una pareja para evitar pulsaciones que alteren el turno.
 
-- Página principal con **3 secciones accesibles** y cada una mostrando un juego distinto.
-- **Tres en raya** como juego obligatorio con lógica completa y validación del ganador.
-- Dos juegos adicionales elegidos por la autora, con una temática clara y un diseño original.
-- Diseño **full responsive** adaptado a distintas resoluciones.
-- Interfaz moderna, visualmente cuidada y con buena maquetación.
-- Puntuación persistente con **Local Storage**, para que la información se mantenga al recargar la página.
-- Lógica de juego separada en módulos y estructura ordenada por componentes.
-- Experiencia de usuario fluida, clara y accesible.
-- Desarrollo pensado para una entrega académica de alto nivel dentro del máster.
-
-### Estructura del proyecto
-
-```text
-├── public/
-│   └── assets/
-├── src/
-│   ├── components/
-│   │   ├── GameBoard/
-│   │   ├── GameCard/
-│   │   ├── Header/
-│   │   ├── ScorePanel/
-│   │   └── Footer/
-│   ├── data/
-│   │   └── gamesData.js
-│   ├── games/
-│   │   ├── ticTacToe/
-│   │   ├── gameTwo/
-│   │   └── gameThree/
-│   ├── styles/
-│   │   └── style.css
-│   ├── utils/
-│   │   └── storage.js
-│   └── main.js
-├── index.html
-├── package.json
-├── vite.config.js
-├── .gitignore
-└── README.md
-```
-
-### Instalación local
-
-1. Clona el repositorio:
-
-   ```bash
-   git clone https://github.com/AraceliFradejas/RTC-PROYECTO5-GAMES-HUB.git
-   ```
-
-2. Accede al proyecto e instala las dependencias:
-
-   ```bash
-   cd RTC-PROYECTO5-GAMES-HUB
-   npm install
-   ```
-
-3. Ejecuta la aplicación en modo desarrollo:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Comprueba la compilación para producción:
-
-   ```bash
-   npm run build
-   ```
-
-### Despliegue
-
-El proyecto está desplegado en **Vercel** y disponible en la siguiente URL:
-
-- https://rtc-proyecto-5-games-hub.vercel.app/
-
-### Tecnologías utilizadas
+## Tecnologías
 
 - Vite
-- JavaScript ES Modules
-- HTML5 semántico
-- CSS3, Flexbox y CSS Grid
-- Diseño responsive y variables CSS
-- Manipulación del DOM y eventos
-- Local Storage para la puntuación
-- Git y GitHub
-- Vercel
+- JavaScript vanilla con ES Modules
+- HTML generado dinámicamente desde JavaScript
+- CSS, Flexbox y CSS Grid
+- Local Storage
 
-### Autora
+## Estructura real
+
+```text
+.
+├── index.html
+├── package.json
+├── package-lock.json
+└── src
+    ├── data.js
+    ├── games
+    │   ├── memory.js
+    │   ├── rps.js
+    │   └── ticTacToe.js
+    ├── main.js
+    ├── storage.js
+    └── style.css
+```
+
+## Ejecutar el proyecto
+
+```bash
+git clone https://github.com/AraceliFradejas/RTC-PROYECTO5-GAMES-HUB.git
+cd RTC-PROYECTO5-GAMES-HUB
+npm install
+npm run dev
+```
+
+Para comprobar la versión de producción:
+
+```bash
+npm run build
+npm run preview
+```
+
+## Comprobaciones realizadas
+
+- Victorias horizontales, verticales y diagonales en tres en raya.
+- Empate, bloqueo del tablero terminado y reinicio de una partida.
+- Bloqueo de cartas durante la comparación en memoria.
+- Reinicio de memoria aunque haya una comparación pendiente.
+- Actualización y borrado de las puntuaciones.
+- Conservación de las puntuaciones después de recargar.
+- Cambio de idioma sin perder los resultados guardados.
+- Distribución responsive en móvil, tablet y escritorio.
+- Navegación con teclado y mensajes de resultado anunciados mediante `aria-live`.
+
+## Autora
 
 **Araceli Fradejas Muñoz**
 
-### Redes sociales y enlaces
-
-- GitHub: https://github.com/AraceliFradejas
-- LinkedIn: https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/
-- Instagram: https://www.instagram.com/goldilocks1013x/
-- X (Twitter): https://x.com/AraceliFradejas
-- TikTok: https://www.tiktok.com/@arucci1
-- YouTube: https://www.youtube.com/@aracelifradejasmunoz2758
-- Medium: https://medium.com/@araceli.fradejas
-
-### Nota final
-
-Este proyecto es una entrega académica desarrollada con fines formativos dentro del máster de ThePower TECH. La intención es crear una experiencia divertida, técnica y visualmente atractiva, donde la lógica y el diseño trabajen de la mano para ofrecer una web de juegos moderna y funcional.
-
----
-
-## English version
-
-Academic project developed within ThePower TECH master's program, in the **Web Design Advanced** module. The main idea of this project is to build a single-page web with several mini games in vanilla JavaScript, combining logic, usability and attractive design in a fully responsive experience.
-
-### Academic project
-
-This exercise is part of the final project for **Module 4: Web Design Advanced** within the ThePower TECH master's program. The project is developed with **Vite** and **vanilla JavaScript**, applying a modular structure, good programming practices and a clear organization of the code to improve maintainability and scalability.
-
-The proposal consists of a one-page website that integrates **three different games** in independent sections. One of them is a mandatory **tic-tac-toe** game, while the other two are chosen according to the theme and creativity of the project. The experience focuses on delivering a modern, fast and accessible interface with a clean layout designed for mobile, tablet and desktop devices.
-
-### Demo
-
-The project demo is live at:
-
-- https://rtc-proyecto-5-games-hub.vercel.app/
-
-### Features
-
-- Main page with **3 accessible sections**, each showing a different game.
-- **Tic-tac-toe** as a mandatory game with full logic and winner validation.
-- Two additional games selected by the author, with a clear theme and original design.
-- **Fully responsive** design adapted to different screen sizes.
-- Modern interface with a polished layout and strong visual identity.
-- Score persistence using **Local Storage**, so the information remains available after reloading the page.
-- Game logic separated into modules and organized structure by components.
-- Smooth, clear and accessible user experience.
-- Development designed for a high-level academic submission within the master's program.
-
-### Project structure
-
-```text
-├── public/
-│   └── assets/
-├── src/
-│   ├── components/
-│   │   ├── GameBoard/
-│   │   ├── GameCard/
-│   │   ├── Header/
-│   │   ├── ScorePanel/
-│   │   └── Footer/
-│   ├── data/
-│   │   └── gamesData.js
-│   ├── games/
-│   │   ├── ticTacToe/
-│   │   ├── gameTwo/
-│   │   └── gameThree/
-│   ├── styles/
-│   │   └── style.css
-│   ├── utils/
-│   │   └── storage.js
-│   └── main.js
-├── index.html
-├── package.json
-├── vite.config.js
-├── .gitignore
-└── README.md
-```
-
-### Local installation
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/AraceliFradejas/RTC-PROYECTO5-GAMES-HUB.git
-   ```
-
-2. Open the project folder and install dependencies:
-
-   ```bash
-   cd RTC-PROYECTO5-GAMES-HUB
-   npm install
-   ```
-
-3. Run the application in development mode:
-
-   ```bash
-   npm run dev
-   ```
-
-4. Verify the production build:
-
-   ```bash
-   npm run build
-   ```
-
-### Deployment
-
-The project is deployed on **Vercel** and available at:
-
-- https://rtc-proyecto-5-games-hub.vercel.app/
-
-### Technologies used
-
-- Vite
-- JavaScript ES Modules
-- Semantic HTML5
-- CSS3, Flexbox and CSS Grid
-- Responsive design and CSS variables
-- DOM manipulation and events
-- Local Storage for scores
-- Git and GitHub
-- Vercel
-
-### Author
-
-**Araceli Fradejas Muñoz**
-
-### Social links and profiles
-
-- GitHub: https://github.com/AraceliFradejas
-- LinkedIn: https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/
-- Instagram: https://www.instagram.com/goldilocks1013x/
-- X (Twitter): https://x.com/AraceliFradejas
-- TikTok: https://www.tiktok.com/@arucci1
-- YouTube: https://www.youtube.com/@aracelifradejasmunoz2758
-- Medium: https://medium.com/@araceli.fradejas
-
-### Final note
-
-This project is an academic assignment developed for educational purposes within ThePower TECH master's program. The goal is to create a fun, technical and visually appealing experience where logic and design work together to deliver a modern and functional games website.
+- [GitHub](https://github.com/AraceliFradejas)
+- [LinkedIn](https://www.linkedin.com/in/araceli-fradejas-munoz-transformaciondigital/)
