@@ -115,7 +115,7 @@ app.innerHTML = `
           <strong>NOTA MUY IMPORTANTE:</strong> Esta página es un ejercicio realizado por
           <strong>Araceli Fradejas Muñoz</strong> como entrega para el
           <strong>PROYECTO: GAMES HUB</strong>, del <em>"módulo 4: Web Design Advanced"</em>
-          del máster <strong>ROCK THE CODE</strong> de la escuela ThePower / Hackio. Es una
+          del máster <strong>ROCK THE CODE</strong> de la escuela ThePower Tech. Es una
           web interactiva con varios mini juegos desarrollada con Vite, JavaScript vanilla y Local
           Storage. No es una aplicación oficial ni un producto comercial.
         </p>
@@ -123,7 +123,7 @@ app.innerHTML = `
           <strong>VERY IMPORTANT NOTE:</strong> This page is an exercise created by
           <strong>Araceli Fradejas Muñoz</strong> as a submission for the
           <strong>PROJECT: GAMES HUB</strong>, from <em>"Module 4: Web Design Advanced"</em>
-          of the <strong>ROCK THE CODE</strong> master program at ThePower / Hackio school. It is
+          of the <strong>ROCK THE CODE</strong> master program at ThePower Tech school. It is
           an interactive web with several mini games built with Vite, vanilla JavaScript and Local
           Storage. It is not an official application and not a commercial product.
         </p>
