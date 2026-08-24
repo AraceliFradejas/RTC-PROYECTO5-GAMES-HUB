@@ -659,7 +659,7 @@ button:disabled {
   padding: 28px;
 }
 
-.about-panel h3 {
+.about-panel h2 {
   margin: 0;
   font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
   font-size: clamp(2rem, 4vw, 3rem);

@@ -126,7 +126,7 @@ function renderApp() {
         <section class="about-section" id="about">
           <div class="about-panel">
             <span class="eyebrow">${text.aboutEyebrow}</span>
-            <h3>${text.aboutTitle}</h3>
+            <h2>${text.aboutTitle}</h2>
             <p>${text.aboutText}</p>
           </div>
         </section>
