@@ -10,7 +10,7 @@ app.innerHTML = `
   <div class="page-shell">
     <header class="topbar">
       <a href="#top" class="brand" aria-label="Ir al inicio">
-        <span class="brand__mark">GH</span>
+        <span class="brand__mark">AFM</span>
         <span class="brand__text">
           <strong>Games Hub</strong>
         </span>
