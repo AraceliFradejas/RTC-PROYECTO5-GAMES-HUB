@@ -32,6 +32,11 @@ app.innerHTML = `
             Aquí no hay prisa ni presión: solo juegos sencillos, un diseño amable y esa sensación de
             “me apetece una partida más”. Porque a veces el mejor descanso es jugar sin complicarlo.
           </p>
+          <div class="hero__badges" aria-label="Detalles del proyecto">
+            <span>3 juegos</span>
+            <span>sin estrés</span>
+            <span>puntuación guardada</span>
+          </div>
           <div class="hero__actions">
             <a href="#games" class="button button--primary">Jugar ahora</a>
             <a href="#about" class="button button--ghost">Sobre este rincón</a>
