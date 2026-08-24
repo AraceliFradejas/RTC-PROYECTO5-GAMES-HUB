@@ -2,6 +2,29 @@ import { readGameScore, writeGameScore } from '../storage.js';
 
 const emojiPool = ['☕', '✦', '🎧', '🌙', '💡', '🪩', '🌿', '✨'];
 
+const strings = {
+  es: {
+    attempts: 'Intentos',
+    reset: 'Reiniciar',
+    pairs: 'Pares',
+    best: 'Récord',
+    searchPairs: 'Busca los pares.',
+    matchFound: 'Pareja encontrada.',
+    noMatch: 'No coincide. Inténtalo de nuevo.',
+    complete: '¡Lo has completado!',
+  },
+  en: {
+    attempts: 'Attempts',
+    reset: 'Reset',
+    pairs: 'Pairs',
+    best: 'Best',
+    searchPairs: 'Find the matches.',
+    matchFound: 'Match found.',
+    noMatch: 'No match. Try again.',
+    complete: 'You completed it!',
+  },
+};
+
 function shuffle(array) {
   const copy = [...array];
   for (let index = copy.length - 1; index > 0; index -= 1) {
@@ -11,7 +34,8 @@ function shuffle(array) {
   return copy;
 }
 
-export function createMemoryGame() {
+export function createMemoryGame(language = 'es') {
+  const text = strings[language] || strings.es;
   const state = {
     deck: shuffle([...emojiPool, ...emojiPool]).map((symbol, index) => ({
       id: `${symbol}-${index}`,
@@ -22,7 +46,7 @@ export function createMemoryGame() {
     opened: [],
     moves: 0,
     solved: 0,
-    status: 'Busca los pares.',
+    status: text.searchPairs,
     best: readGameScore('memory', { best: 0 }).best,
   };
 
@@ -32,8 +56,8 @@ export function createMemoryGame() {
   const infoRow = document.createElement('div');
   infoRow.className = 'game-card__meta';
   infoRow.innerHTML = `
-    <span>Intentos: <strong>${state.moves}</strong></span>
-    <button type="button" class="mini-button" data-action="reset-memory">Reiniciar</button>
+    <span>${text.attempts}: <strong>${state.moves}</strong></span>
+    <button type="button" class="mini-button" data-action="reset-memory">${text.reset}</button>
   `;
 
   const board = document.createElement('div');
@@ -46,8 +70,8 @@ export function createMemoryGame() {
   const scoreRow = document.createElement('div');
   scoreRow.className = 'score-row';
   scoreRow.innerHTML = `
-    <div class="score-chip"><span>Pares</span><strong>${state.solved}/8</strong></div>
-    <div class="score-chip score-chip--muted"><span>Récord</span><strong>${state.best || '—'}</strong></div>
+    <div class="score-chip"><span>${text.pairs}</span><strong>${state.solved}/8</strong></div>
+    <div class="score-chip score-chip--muted"><span>${text.best}</span><strong>${state.best || '—'}</strong></div>
   `;
 
   function renderBoard() {
@@ -64,8 +88,8 @@ export function createMemoryGame() {
 
     infoRow.querySelector('strong').textContent = state.moves;
     scoreRow.innerHTML = `
-      <div class="score-chip"><span>Pares</span><strong>${state.solved}/8</strong></div>
-      <div class="score-chip score-chip--muted"><span>Récord</span><strong>${state.best || '—'}</strong></div>
+      <div class="score-chip"><span>${text.pairs}</span><strong>${state.solved}/8</strong></div>
+      <div class="score-chip score-chip--muted"><span>${text.best}</span><strong>${state.best || '—'}</strong></div>
     `;
   }
 
@@ -96,14 +120,14 @@ export function createMemoryGame() {
         second.matched = true;
         state.solved += 1;
         state.opened = [];
-        updateStatus('Pareja encontrada.');
+        updateStatus(text.matchFound);
 
         if (state.solved === emojiPool.length) {
           saveBestScore();
-          updateStatus('¡Lo has completado!');
+          updateStatus(text.complete);
         }
       } else {
-        updateStatus('No coincide. Inténtalo de nuevo.');
+        updateStatus(text.noMatch);
         setTimeout(() => {
           first.flipped = false;
           second.flipped = false;
@@ -126,7 +150,7 @@ export function createMemoryGame() {
     state.opened = [];
     state.moves = 0;
     state.solved = 0;
-    state.status = 'Busca los pares.';
+    state.status = text.searchPairs;
     renderBoard();
     updateStatus(state.status);
   }

@@ -12,6 +12,31 @@ const winningLines = [
   [2, 4, 6],
 ];
 
+const strings = {
+  es: {
+    reset: 'Reiniciar',
+    starts: 'Empieza la partida.',
+    draws: 'Empates',
+    clearScore: 'Borrar puntuación',
+    turnLabel: 'Turno de',
+    drawMessage: 'Empate. La partida queda nivelada.',
+    xWins: 'Gana X. Muy bien jugado.',
+    oWins: 'Gana O. Buen duelo.',
+    cell: 'Casilla',
+  },
+  en: {
+    reset: 'Reset',
+    starts: 'The round starts here.',
+    draws: 'Draws',
+    clearScore: 'Clear score',
+    turnLabel: 'Turn of',
+    drawMessage: 'Draw. The round stays even.',
+    xWins: 'X wins. Nice move.',
+    oWins: 'O wins. Good match.',
+    cell: 'Cell',
+  },
+};
+
 function checkWinner(board) {
   for (const [a, b, c] of winningLines) {
     if (board[a] && board[a] === board[b] && board[a] === board[c]) {
@@ -22,7 +47,8 @@ function checkWinner(board) {
   return board.every(Boolean) ? 'draw' : null;
 }
 
-export function createTicTacToeGame() {
+export function createTicTacToeGame(language = 'es') {
+  const text = strings[language] || strings.es;
   const gameState = {
     board: Array(9).fill(''),
     currentPlayer: 'X',
@@ -36,8 +62,8 @@ export function createTicTacToeGame() {
   const heading = document.createElement('div');
   heading.className = 'game-card__meta';
   heading.innerHTML = `
-    <span>Turno de <strong>X</strong></span>
-    <button type="button" class="mini-button" data-action="reset-board">Reiniciar</button>
+    <span>${text.turnLabel} <strong>X</strong></span>
+    <button type="button" class="mini-button" data-action="reset-board">${text.reset}</button>
   `;
 
   const board = document.createElement('div');
@@ -45,20 +71,20 @@ export function createTicTacToeGame() {
 
   const status = document.createElement('p');
   status.className = 'game-card__status';
-  status.textContent = 'Empieza la partida.';
+  status.textContent = text.starts;
 
   const scoreBoard = document.createElement('div');
   scoreBoard.className = 'score-row';
   scoreBoard.innerHTML = `
     <div class="score-chip"><span>X</span><strong>${gameState.scores.X}</strong></div>
-    <div class="score-chip score-chip--muted"><span>Empates</span><strong>${gameState.scores.draws}</strong></div>
+    <div class="score-chip score-chip--muted"><span>${text.draws}</span><strong>${gameState.scores.draws}</strong></div>
     <div class="score-chip"><span>O</span><strong>${gameState.scores.O}</strong></div>
   `;
 
   const resetScoresButton = document.createElement('button');
   resetScoresButton.type = 'button';
   resetScoresButton.className = 'mini-button mini-button--ghost';
-  resetScoresButton.textContent = 'Borrar puntuación';
+  resetScoresButton.textContent = text.clearScore;
 
   function paintBoard() {
     board.innerHTML = '';
@@ -68,7 +94,7 @@ export function createTicTacToeGame() {
       button.type = 'button';
       button.className = `cell ${cellValue ? 'cell--filled' : ''}`;
       button.setAttribute('data-index', String(index));
-      button.setAttribute('aria-label', `Casilla ${index + 1}`);
+      button.setAttribute('aria-label', `${text.cell} ${index + 1}`);
       button.textContent = cellValue;
       button.disabled = !gameState.active || Boolean(cellValue);
       button.addEventListener('click', () => makeMove(index));
@@ -83,7 +109,7 @@ export function createTicTacToeGame() {
   function updateScores() {
     scoreBoard.innerHTML = `
       <div class="score-chip"><span>X</span><strong>${gameState.scores.X}</strong></div>
-      <div class="score-chip score-chip--muted"><span>Empates</span><strong>${gameState.scores.draws}</strong></div>
+      <div class="score-chip score-chip--muted"><span>${text.draws}</span><strong>${gameState.scores.draws}</strong></div>
       <div class="score-chip"><span>O</span><strong>${gameState.scores.O}</strong></div>
     `;
     writeGameScore('tictactoe', gameState.scores);
@@ -94,14 +120,14 @@ export function createTicTacToeGame() {
 
     if (result === 'draw') {
       gameState.scores.draws += 1;
-      status.textContent = 'Empate. La partida queda nivelada.';
+      status.textContent = text.drawMessage;
     } else {
       if (result === 'X') {
         gameState.scores.X += 1;
-        status.textContent = 'Gana X. Muy bien jugado.';
+        status.textContent = text.xWins;
       } else {
         gameState.scores.O += 1;
-        status.textContent = 'Gana O. Buen duelo.';
+        status.textContent = text.oWins;
       }
     }
 
@@ -121,7 +147,7 @@ export function createTicTacToeGame() {
     }
 
     gameState.currentPlayer = gameState.currentPlayer === 'X' ? 'O' : 'X';
-    status.textContent = `Turno de ${gameState.currentPlayer}`;
+    status.textContent = `${text.turnLabel} ${gameState.currentPlayer}`;
     paintBoard();
   }
 
@@ -129,7 +155,7 @@ export function createTicTacToeGame() {
     gameState.board = Array(9).fill('');
     gameState.currentPlayer = 'X';
     gameState.active = true;
-    status.textContent = 'Empieza la partida.';
+    status.textContent = text.starts;
     paintBoard();
   }
 

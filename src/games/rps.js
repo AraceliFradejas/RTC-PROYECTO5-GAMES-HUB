@@ -1,10 +1,39 @@
 import { readGameScore, writeGameScore } from '../storage.js';
 
-const options = [
-  { label: 'Piedra', value: 'rock', emoji: '✊' },
-  { label: 'Papel', value: 'paper', emoji: '✋' },
-  { label: 'Tijera', value: 'scissors', emoji: '✌️' },
-];
+const strings = {
+  es: {
+    options: [
+      { label: 'Piedra', value: 'rock', emoji: '✊' },
+      { label: 'Papel', value: 'paper', emoji: '✋' },
+      { label: 'Tijera', value: 'scissors', emoji: '✌️' },
+    ],
+    chooseMove: 'Elige tu movimiento.',
+    wins: 'Victorias',
+    draws: 'Empates',
+    losses: 'Derrotas',
+    clearScore: 'Borrar puntuación',
+    resetTable: 'La tabla se ha reiniciado.',
+    playerWins: 'Tú eliges {player} y ganas a {machine}.',
+    machineWins: 'La máquina elige {machine} y se lleva la victoria.',
+    draw: 'Empate. Ambos habéis elegido {choice}.',
+  },
+  en: {
+    options: [
+      { label: 'Rock', value: 'rock', emoji: '✊' },
+      { label: 'Paper', value: 'paper', emoji: '✋' },
+      { label: 'Scissors', value: 'scissors', emoji: '✌️' },
+    ],
+    chooseMove: 'Choose your move.',
+    wins: 'Wins',
+    draws: 'Draws',
+    losses: 'Losses',
+    clearScore: 'Clear score',
+    resetTable: 'The scoreboard has been reset.',
+    playerWins: 'You pick {player} and beat {machine}.',
+    machineWins: 'The machine picks {machine} and takes the round.',
+    draw: 'Draw. You both picked {choice}.',
+  },
+};
 
 function getWinner(player, machine) {
   if (player === machine) return 'draw';
@@ -16,7 +45,9 @@ function getWinner(player, machine) {
   return wins[player] === machine ? 'player' : 'machine';
 }
 
-export function createRpsGame() {
+export function createRpsGame(language = 'es') {
+  const text = strings[language] || strings.es;
+  const options = text.options;
   const state = readGameScore('rps', { wins: 0, losses: 0, draws: 0 });
 
   const wrapper = document.createElement('div');
@@ -27,21 +58,21 @@ export function createRpsGame() {
 
   const result = document.createElement('p');
   result.className = 'game-card__status';
-  result.textContent = 'Elige tu movimiento.';
+  result.textContent = text.chooseMove;
 
   const scoreBoard = document.createElement('div');
   scoreBoard.className = 'score-row';
   scoreBoard.innerHTML = `
-    <div class="score-chip"><span>Victorias</span><strong>${state.wins}</strong></div>
-    <div class="score-chip score-chip--muted"><span>Empates</span><strong>${state.draws}</strong></div>
-    <div class="score-chip"><span>Derrotas</span><strong>${state.losses}</strong></div>
+    <div class="score-chip"><span>${text.wins}</span><strong>${state.wins}</strong></div>
+    <div class="score-chip score-chip--muted"><span>${text.draws}</span><strong>${state.draws}</strong></div>
+    <div class="score-chip"><span>${text.losses}</span><strong>${state.losses}</strong></div>
   `;
 
   function refreshScores() {
     scoreBoard.innerHTML = `
-      <div class="score-chip"><span>Victorias</span><strong>${state.wins}</strong></div>
-      <div class="score-chip score-chip--muted"><span>Empates</span><strong>${state.draws}</strong></div>
-      <div class="score-chip"><span>Derrotas</span><strong>${state.losses}</strong></div>
+      <div class="score-chip"><span>${text.wins}</span><strong>${state.wins}</strong></div>
+      <div class="score-chip score-chip--muted"><span>${text.draws}</span><strong>${state.draws}</strong></div>
+      <div class="score-chip"><span>${text.losses}</span><strong>${state.losses}</strong></div>
     `;
     writeGameScore('rps', state);
   }
@@ -58,13 +89,13 @@ export function createRpsGame() {
 
       if (outcome === 'player') {
         state.wins += 1;
-        result.textContent = `Tú eliges ${option.label} y ganas a ${machineOption.label}.`;
+        result.textContent = text.playerWins.replace('{player}', option.label).replace('{machine}', machineOption.label);
       } else if (outcome === 'machine') {
         state.losses += 1;
-        result.textContent = `La máquina elige ${machineOption.label} y se lleva la victoria.`;
+        result.textContent = text.machineWins.replace('{machine}', machineOption.label);
       } else {
         state.draws += 1;
-        result.textContent = `Empate. Ambos habéis elegido ${option.label}.`;
+        result.textContent = text.draw.replace('{choice}', option.label);
       }
 
       refreshScores();
@@ -76,12 +107,12 @@ export function createRpsGame() {
   const resetButton = document.createElement('button');
   resetButton.type = 'button';
   resetButton.className = 'mini-button mini-button--ghost';
-  resetButton.textContent = 'Borrar puntuación';
+  resetButton.textContent = text.clearScore;
   resetButton.addEventListener('click', () => {
     state.wins = 0;
     state.losses = 0;
     state.draws = 0;
-    result.textContent = 'La tabla se ha reiniciado.';
+    result.textContent = text.resetTable;
     refreshScores();
   });
 
