@@ -26,20 +26,20 @@ app.innerHTML = `
     <main id="top">
       <section class="hero">
         <div class="hero__copy">
-          <span class="eyebrow">Una pequeña colección personal</span>
-          <h1>Juegos rápidos, elegantes y hechos <span>a mi manera.</span></h1>
+          <span class="eyebrow">Tu rincón para desconectar</span>
+          <h1>Pequeñas victorias <span>para un rato muy bonito.</span></h1>
           <p>
-            Un rincón digital donde la lógica y el diseño se encuentran con una estética sobria,
-            cercana y distinta. Porque incluso las ideas más simples pueden sentirse muy personales.
+            Aquí no hay prisa ni presión: solo juegos sencillos, un diseño amable y esa sensación de
+            “me apetece una partida más”. Porque a veces el mejor descanso es jugar sin complicarlo.
           </p>
           <div class="hero__actions">
-            <a href="#games" class="button button--primary">Explorar juegos</a>
-            <a href="#about" class="button button--ghost">Más sobre el proyecto</a>
+            <a href="#games" class="button button--primary">Jugar ahora</a>
+            <a href="#about" class="button button--ghost">Sobre este rincón</a>
           </div>
         </div>
 
         <div class="hero__panel" id="scores" aria-label="Resumen general de puntuación">
-          <p>Panel general</p>
+          <p>Tu tablero de progreso</p>
           <div class="summary-grid">
             <div>
               <span class="summary-label">Tres en raya</span>
@@ -76,20 +76,20 @@ app.innerHTML = `
 
       <section class="about-section" id="about">
         <div class="about-panel">
-          <span class="eyebrow">Sobre el proyecto</span>
-          <h3>Un pequeño espacio para jugar, pensar y disfrutar.</h3>
+          <span class="eyebrow">Sobre este rincón</span>
+          <h3>Un sitio para jugar, reírse y volver a probar.</h3>
           <p>
-            Games Hub nació como una idea muy clara: construir una web de juegos con una sensibilidad
-            más editorial que tecnológica. El objetivo no era crear algo excesivamente complejo, sino
-            algo cómodo, elegante, útil y con personalidad propia. Cada juego tiene su lugar, su tono y
-            su forma de invitar a jugar sin ruido visual innecesario.
+            Games Hub nació con una idea muy simple: que jugar no tenga que ser complicado ni frío.
+            Aquí cada partida invita a relajarse, concentrarse y pasar un buen rato sin perder la
+            personalidad. Un espacio de contraste, de color suave y de pequeñas victorias que hacen
+            sonreír entre una tarea y otra.
           </p>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <p>Games Hub — diseño y lógica pensadas con calma.</p>
+      <p>Games Hub — para jugar un rato y volver con mejor energía.</p>
     </footer>
   </div>
 `;

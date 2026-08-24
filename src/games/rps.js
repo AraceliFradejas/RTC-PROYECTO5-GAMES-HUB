@@ -32,16 +32,16 @@ export function createRpsGame() {
   const scoreBoard = document.createElement('div');
   scoreBoard.className = 'score-row';
   scoreBoard.innerHTML = `
-    <div class="score-chip"><span>Wins</span><strong>${state.wins}</strong></div>
+    <div class="score-chip"><span>Victorias</span><strong>${state.wins}</strong></div>
     <div class="score-chip score-chip--muted"><span>Empates</span><strong>${state.draws}</strong></div>
-    <div class="score-chip"><span>Losses</span><strong>${state.losses}</strong></div>
+    <div class="score-chip"><span>Derrotas</span><strong>${state.losses}</strong></div>
   `;
 
   function refreshScores() {
     scoreBoard.innerHTML = `
-      <div class="score-chip"><span>Wins</span><strong>${state.wins}</strong></div>
+      <div class="score-chip"><span>Victorias</span><strong>${state.wins}</strong></div>
       <div class="score-chip score-chip--muted"><span>Empates</span><strong>${state.draws}</strong></div>
-      <div class="score-chip"><span>Losses</span><strong>${state.losses}</strong></div>
+      <div class="score-chip"><span>Derrotas</span><strong>${state.losses}</strong></div>
     `;
     writeGameScore('rps', state);
   }
