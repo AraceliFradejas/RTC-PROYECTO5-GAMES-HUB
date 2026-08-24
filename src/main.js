@@ -168,9 +168,18 @@ function renderApp() {
         </div>
 
         <div class="footer__note">
-          <p>${lang === 'es'
-            ? 'Proyecto realizado para practicar lógica de programación, manipulación del DOM y persistencia de datos con JavaScript vanilla.'
-            : 'A project made to practise programming logic, DOM manipulation and data persistence with vanilla JavaScript.'}</p>
+          <p>
+            <strong>${lang === 'es' ? 'NOTA IMPORTANTE:' : 'IMPORTANT NOTE:'}</strong>
+            ${lang === 'es'
+              ? 'Estoy aprendiendo programación y esto lo hago para divertirme durante las vacaciones. Es un proyecto personal, creativo y experimental dentro del módulo "Web Design Advanced" de ThePower Tech. No es una aplicación oficial ni un producto comercial, sino una forma de practicar, aprender y disfrutar haciendo cosas con código.'
+              : 'I am learning programming and I am doing this to have fun during my holidays. This is a personal, creative and experimental project for the "Web Design Advanced" module at ThePower Tech. It is not an official app or a commercial product, but a way to practice, learn and enjoy creating things with code.'}
+          </p>
+          <p>
+            <strong>${lang === 'es' ? 'IMPORTANT NOTE:' : 'NOTA IMPORTANTE:'}</strong>
+            ${lang === 'es'
+              ? 'I am learning programming and I am doing this to have fun during my holidays. This is a personal, creative and experimental project for the "Web Design Advanced" module at ThePower Tech. It is not an official app or a commercial product, but a way to practice, learn and enjoy creating things with code.'
+              : 'Estoy aprendiendo programación y esto lo hago para divertirme durante las vacaciones. Es un proyecto personal, creativo y experimental dentro del módulo "Web Design Advanced" de ThePower Tech. No es una aplicación oficial ni un producto comercial, sino una forma de practicar, aprender y disfrutar haciendo cosas con código.'}
+          </p>
         </div>
       </footer>
     </div>
