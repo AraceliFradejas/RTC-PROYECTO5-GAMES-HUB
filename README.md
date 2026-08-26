@@ -204,6 +204,19 @@ npm run preview
 - Responsive layouts for mobile, tablet and desktop.
 - Keyboard navigation and result messages announced with `aria-live`.
 
+## Refactoring after the review
+
+All the changes requested in the project review have been implemented:
+
+- `main.js` was reduced from 231 lines to an entry point of approximately 50 lines. The header, hero, game cards, about section and footer are now independent components inside `src/components`.
+- The former 881-line stylesheet was divided by responsibility into `base.css`, `hero.css`, `games.css`, `footer.css` and `responsive.css`, coordinated through `styles/index.css`.
+- Interface construction was standardised: both the page and the games now use HTML templates through the shared `createElementFromHTML` helper instead of mixing manual `createElement()` blocks with template literals.
+- Memory Match now includes a **Clear best score** button. It resets the stored record and updates the progress panel independently from the game reset.
+- The footer renders only the note and heading belonging to the currently selected language.
+- `resetGameScore` is no longer unused code: all three games import and call it when deleting their stored results.
+- When Tic-Tac-Toe ends, its heading stops announcing the current turn and displays **Round finished**. Resetting the board restores X as the active player.
+- An automated regression test verifies that clearing one game score does not delete the results belonging to the other games.
+
 ## Author
 
 **Araceli Fradejas Muñoz**
