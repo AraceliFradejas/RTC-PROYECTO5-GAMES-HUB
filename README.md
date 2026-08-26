@@ -47,7 +47,13 @@ El panel situado al principio de la página muestra un resumen de la actividad y
     │   └── ticTacToe.js
     ├── main.js
     ├── storage.js
-    └── style.css
+    └── styles
+        ├── base.css
+        ├── footer.css
+        ├── games.css
+        ├── hero.css
+        ├── index.css
+        └── responsive.css
 ```
 
 ## Ejecutar el proyecto
@@ -77,6 +83,19 @@ npm run preview
 - Cambio de idioma sin perder los resultados guardados.
 - Distribución responsive en móvil, tablet y escritorio.
 - Navegación con teclado y mensajes de resultado anunciados mediante `aria-live`.
+
+## Refactorización tras la revisión
+
+Se han aplicado todos los ajustes solicitados en la corrección:
+
+- `main.js` se redujo de 231 líneas a un punto de entrada de unas 50 líneas. La cabecera, el hero, las tarjetas de juegos, la sección informativa y el footer son ahora componentes independientes dentro de `src/components`.
+- La antigua hoja de estilos de 881 líneas se dividió por responsabilidad en `base.css`, `hero.css`, `games.css`, `footer.css` y `responsive.css`, coordinadas desde `styles/index.css`.
+- Se unificó la construcción de interfaz: tanto la página como los juegos parten de plantillas HTML mediante el helper compartido `createElementFromHTML`; ya no se mezclan bloques creados manualmente con `createElement()` y otros con literales.
+- Memoria visual incorpora el botón **Borrar récord / Clear best score**, actualiza el panel superior y conserva por separado el reinicio de la partida.
+- El footer renderiza exclusivamente la nota y el encabezado correspondientes al idioma seleccionado.
+- `resetGameScore` ya no es código sin uso: los tres juegos lo importan y utilizan para eliminar sus resultados guardados.
+- Al terminar Tres en raya, el encabezado deja de anunciar el turno y muestra **Partida terminada / Round finished**. Al reiniciar vuelve a mostrar el turno de X.
+- Se añadió una prueba automatizada para comprobar que el borrado elimina solo el resultado del juego solicitado.
 
 ## Autora
 
@@ -135,13 +154,26 @@ The progress panel at the top of the page shows a summary and updates while you 
 ├── package-lock.json
 └── src
     ├── data.js
+    ├── components
+    │   ├── About.js
+    │   ├── Footer.js
+    │   ├── GamesSection.js
+    │   ├── Header.js
+    │   ├── Hero.js
+    │   └── dom.js
     ├── games
     │   ├── memory.js
     │   ├── rps.js
     │   └── ticTacToe.js
     ├── main.js
     ├── storage.js
-    └── style.css
+    └── styles
+        ├── base.css
+        ├── footer.css
+        ├── games.css
+        ├── hero.css
+        ├── index.css
+        └── responsive.css
 ```
 
 ## Run locally

@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { checkWinner } from '../src/games/ticTacToe.js';
 import { getWinner } from '../src/games/rps.js';
+import { readAllScores, resetGameScore } from '../src/storage.js';
 
 test('tres en raya detecta las ocho líneas ganadoras', () => {
   const winningLines = [
@@ -35,4 +36,20 @@ test('piedra, papel o tijera calcula victorias y empates', () => {
   assert.equal(getWinner('scissors', 'paper'), 'player');
   assert.equal(getWinner('rock', 'paper'), 'machine');
   assert.equal(getWinner('paper', 'paper'), 'draw');
+});
+
+test('resetGameScore borra solo la puntuación del juego indicado', () => {
+  const values = new Map([
+    ['gamesHubScores', JSON.stringify({ memory: { best: 12 }, rps: { wins: 3 } })],
+  ]);
+  global.localStorage = {
+    getItem: (key) => values.get(key) ?? null,
+    setItem: (key, value) => values.set(key, value),
+  };
+  global.window = { dispatchEvent: () => {} };
+  global.CustomEvent = class CustomEvent {};
+
+  resetGameScore('memory');
+
+  assert.deepEqual(readAllScores(), { rps: { wins: 3 } });
 });
