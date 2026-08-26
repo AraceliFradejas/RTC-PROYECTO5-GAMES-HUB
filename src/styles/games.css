@@ -1,0 +1,230 @@
+.games-section {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px;
+  margin-top: 24px;
+}
+
+.game-card {
+  padding: 18px;
+}
+
+.game-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.game-card__header h2 {
+  margin: 0;
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+  font-size: clamp(1.35rem, 2vw, 1.8rem);
+  line-height: 1.2;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.03em;
+}
+
+.game-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(214, 177, 125, 0.12);
+  border: 1px solid rgba(214, 177, 125, 0.3);
+  color: var(--gold-soft);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.game-card__description {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+  min-height: 110px;
+  position: relative;
+  z-index: 1;
+}
+
+.game-card__body {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.game-card__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.game-card__meta strong {
+  color: var(--text);
+}
+
+.game-card__status {
+  margin: 0;
+  min-height: 22px;
+  color: var(--gold-soft);
+  font-weight: 500;
+}
+
+.mini-button {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+.mini-button--ghost {
+  width: fit-content;
+}
+
+.score-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.score-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.025);
+  border: 1px solid var(--line);
+}
+
+.score-chip span {
+  color: var(--muted);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.score-chip strong {
+  font-size: 1.2rem;
+}
+
+.score-chip--muted {
+  background: rgba(214, 177, 125, 0.08);
+}
+
+.tic-tac-toe {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cell {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  min-height: 80px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cell--filled {
+  color: var(--gold-soft);
+}
+
+.cell:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.memory-card {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.memory-card.is-visible {
+  background: rgba(214, 177, 125, 0.12);
+  border-color: rgba(214, 177, 125, 0.35);
+  color: var(--gold-soft);
+}
+
+.memory-card.is-matched {
+  background: rgba(175, 193, 234, 0.12);
+  border-color: rgba(175, 193, 234, 0.38);
+  color: var(--blue);
+}
+
+.rps-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rps-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 84px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.rps-button span {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rps-button:hover,
+.button:hover,
+.mini-button:hover,
+.memory-card:hover,
+.cell:not(:disabled):hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(92, 78, 69, 0.08);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #6f5bb5;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  transform: none;
+  box-shadow: none;
+}
