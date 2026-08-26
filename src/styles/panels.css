@@ -1,0 +1,71 @@
+.hero__panel,
+.about-panel,
+.game-card {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.68);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+}
+
+.game-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.game-card::before {
+  content: '';
+  position: absolute;
+  inset: -1px -1px auto auto;
+  width: 120px;
+  height: 120px;
+  border-radius: 0 0 0 100%;
+  opacity: 0.26;
+  background: linear-gradient(135deg, rgba(255,255,255,0.5), transparent);
+}
+
+.game-card--sun {
+  background: linear-gradient(180deg, rgba(255, 244, 226, 0.85), rgba(255, 255, 255, 0.7));
+}
+
+.game-card--rose {
+  background: linear-gradient(180deg, rgba(255, 236, 236, 0.85), rgba(255, 255, 255, 0.7));
+}
+
+.game-card--gold {
+  background: linear-gradient(180deg, rgba(253, 245, 219, 0.9), rgba(255, 255, 255, 0.7));
+}
+
+.hero__panel {
+  position: relative;
+  padding: 24px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.hero__panel::before {
+  content: '';
+  position: absolute;
+  inset: 12px auto auto 12px;
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(247, 217, 195, 0.9), rgba(247, 217, 195, 0));
+  z-index: 0;
+}
+
+.hero__art {
+  position: relative;
+  z-index: 1;
+  border: 1px solid rgba(120, 94, 88, 0.12);
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(247, 217, 195, 0.38), rgba(255, 255, 255, 0.52));
+  overflow: hidden;
+}
+
+.hero__art svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}

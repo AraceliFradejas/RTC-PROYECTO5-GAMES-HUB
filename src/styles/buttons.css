@@ -1,0 +1,35 @@
+.button,
+.mini-button,
+.rps-button,
+.memory-card,
+.cell {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 18px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  font-weight: 600;
+}
+
+.button--primary {
+  background: linear-gradient(135deg, #f7d9c3, #f8ebba);
+  color: #382d2b;
+  box-shadow: 0 12px 30px rgba(219, 167, 132, 0.25);
+  border: 1px solid rgba(120, 94, 88, 0.08);
+}
+
+.button--primary:hover {
+  box-shadow: 0 18px 36px rgba(219, 167, 132, 0.32);
+}
+
+.button--ghost {
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.45);
+  color: var(--text);
+}

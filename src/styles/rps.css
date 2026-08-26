@@ -1,0 +1,46 @@
+.rps-controls {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.rps-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 84px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.rps-button span {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.rps-button:hover,
+.button:hover,
+.mini-button:hover,
+.memory-card:hover,
+.cell:not(:disabled):hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 12px 24px rgba(92, 78, 69, 0.08);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid #6f5bb5;
+  outline-offset: 3px;
+}
+
+button:disabled {
+  transform: none;
+  box-shadow: none;
+}

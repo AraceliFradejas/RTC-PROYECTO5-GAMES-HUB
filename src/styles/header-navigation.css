@@ -1,0 +1,55 @@
+.header__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.lang-switch {
+  appearance: none;
+  border: 1px solid rgba(93, 76, 68, 0.15);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lang-switch:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px rgba(122, 94, 86, 0.08);
+}
+
+.main-nav a,
+.hero__badges span,
+.eyebrow,
+.button,
+.game-tag,
+.summary-label,
+.footer__title,
+.footer__meta,
+.footer__links a,
+.lang-switch {
+  font-family: 'Comic Neue', 'Comic Sans MS', 'Comic Sans', cursive;
+}
+
+.main-nav a {
+  transition: color 0.2s ease;
+}
+
+.main-nav a:hover {
+  color: var(--text);
+}

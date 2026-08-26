@@ -5,6 +5,7 @@ import { createHero } from './components/Hero.js';
 import { createGamesSection } from './components/GamesSection.js';
 import { createAbout } from './components/About.js';
 import { createFooter } from './components/Footer.js';
+import { createElementFromHTML } from './components/dom.js';
 import { createTicTacToeGame } from './games/ticTacToe.js';
 import { createMemoryGame } from './games/memory.js';
 import { createRpsGame } from './games/rps.js';
@@ -36,10 +37,8 @@ function changeLanguage() {
 function renderApp() {
   const text = translations[currentLanguage];
   document.documentElement.lang = currentLanguage;
-  const shell = document.createElement('div');
-  const main = document.createElement('main');
-  shell.className = 'page-shell';
-  main.id = 'top';
+  const shell = createElementFromHTML('<div class="page-shell"><main id="top"></main></div>');
+  const main = shell.querySelector('main');
   main.append(createHero(text, currentLanguage), createGamesSection(games, currentLanguage, gameFactories), createAbout(text));
   shell.append(createHeader(text, currentLanguage, changeLanguage), main, createFooter(text, currentLanguage));
   app.replaceChildren(shell);

@@ -1,0 +1,30 @@
+.memory-board {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.memory-card {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.memory-card.is-visible {
+  background: rgba(214, 177, 125, 0.12);
+  border-color: rgba(214, 177, 125, 0.35);
+  color: var(--gold-soft);
+}
+
+.memory-card.is-matched {
+  background: rgba(175, 193, 234, 0.12);
+  border-color: rgba(175, 193, 234, 0.38);
+  color: var(--blue);
+}
