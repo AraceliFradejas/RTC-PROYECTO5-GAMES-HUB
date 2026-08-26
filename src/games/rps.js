@@ -1,4 +1,5 @@
-import { readGameScore, writeGameScore } from '../storage.js';
+import { readGameScore, resetGameScore, writeGameScore } from '../storage.js';
+import { createElementFromHTML } from '../components/dom.js';
 
 const strings = {
   es: {
@@ -50,24 +51,10 @@ export function createRpsGame(language = 'es') {
   const options = text.options;
   const state = readGameScore('rps', { wins: 0, losses: 0, draws: 0 });
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'game-card__body';
-
-  const controls = document.createElement('div');
-  controls.className = 'rps-controls';
-
-  const result = document.createElement('p');
-  result.className = 'game-card__status';
-  result.setAttribute('aria-live', 'polite');
-  result.textContent = text.chooseMove;
-
-  const scoreBoard = document.createElement('div');
-  scoreBoard.className = 'score-row';
-  scoreBoard.innerHTML = `
-    <div class="score-chip"><span>${text.wins}</span><strong>${state.wins}</strong></div>
-    <div class="score-chip score-chip--muted"><span>${text.draws}</span><strong>${state.draws}</strong></div>
-    <div class="score-chip"><span>${text.losses}</span><strong>${state.losses}</strong></div>
-  `;
+  const wrapper = createElementFromHTML(`<div class="game-card__body"><div class="rps-controls">${options.map((option) => `<button type="button" class="rps-button" data-choice="${option.value}">${option.emoji}<span>${option.label}</span></button>`).join('')}</div><p class="game-card__status" aria-live="polite">${text.chooseMove}</p><div class="score-row"></div><button type="button" class="mini-button mini-button--ghost" data-action="clear-score">${text.clearScore}</button></div>`);
+  const controls = wrapper.querySelector('.rps-controls');
+  const result = wrapper.querySelector('.game-card__status');
+  const scoreBoard = wrapper.querySelector('.score-row');
 
   function refreshScores() {
     scoreBoard.innerHTML = `
@@ -79,10 +66,7 @@ export function createRpsGame(language = 'es') {
   }
 
   options.forEach((option) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'rps-button';
-    button.innerHTML = `${option.emoji}<span>${option.label}</span>`;
+    const button = controls.querySelector(`[data-choice="${option.value}"]`);
     button.addEventListener('click', () => {
       const machineChoice = options[Math.floor(Math.random() * options.length)].value;
       const outcome = getWinner(option.value, machineChoice);
@@ -102,21 +86,18 @@ export function createRpsGame(language = 'es') {
       refreshScores();
     });
 
-    controls.appendChild(button);
   });
 
-  const resetButton = document.createElement('button');
-  resetButton.type = 'button';
-  resetButton.className = 'mini-button mini-button--ghost';
-  resetButton.textContent = text.clearScore;
+  const resetButton = wrapper.querySelector('[data-action="clear-score"]');
   resetButton.addEventListener('click', () => {
     state.wins = 0;
     state.losses = 0;
     state.draws = 0;
+    resetGameScore('rps');
     result.textContent = text.resetTable;
     refreshScores();
   });
 
-  wrapper.append(controls, result, scoreBoard, resetButton);
+  refreshScores();
   return wrapper;
 }

@@ -1,4 +1,5 @@
-import { readGameScore, writeGameScore } from '../storage.js';
+import { readGameScore, resetGameScore, writeGameScore } from '../storage.js';
+import { createElementFromHTML } from '../components/dom.js';
 
 const emojiPool = ['☕', '✦', '🎧', '🌙', '💡', '🪩', '🌿', '✨'];
 
@@ -15,6 +16,8 @@ const strings = {
     hiddenCard: 'Carta oculta',
     visibleCard: 'Carta con',
     matchedCard: 'Pareja encontrada con',
+    clearScore: 'Borrar récord',
+    scoreCleared: 'El récord se ha borrado.',
   },
   en: {
     attempts: 'Attempts',
@@ -28,6 +31,8 @@ const strings = {
     hiddenCard: 'Hidden card',
     visibleCard: 'Card showing',
     matchedCard: 'Matched card showing',
+    clearScore: 'Clear best score',
+    scoreCleared: 'The best score has been cleared.',
   },
 };
 
@@ -58,50 +63,27 @@ export function createMemoryGame(language = 'es') {
     turnId: 0,
   };
 
-  const wrapper = document.createElement('div');
-  wrapper.className = 'game-card__body';
-
-  const infoRow = document.createElement('div');
-  infoRow.className = 'game-card__meta';
-  infoRow.innerHTML = `
-    <span>${text.attempts}: <strong>${state.moves}</strong></span>
-    <button type="button" class="mini-button" data-action="reset-memory">${text.reset}</button>
-  `;
-
-  const board = document.createElement('div');
-  board.className = 'memory-board';
-  board.setAttribute('role', 'group');
-  board.setAttribute('aria-label', language === 'es' ? 'Tablero de memoria' : 'Memory board');
-
-  const status = document.createElement('p');
-  status.className = 'game-card__status';
-  status.setAttribute('aria-live', 'polite');
-  status.textContent = state.status;
-
-  const scoreRow = document.createElement('div');
-  scoreRow.className = 'score-row';
-  scoreRow.innerHTML = `
-    <div class="score-chip"><span>${text.pairs}</span><strong>${state.solved}/8</strong></div>
-    <div class="score-chip score-chip--muted"><span>${text.best}</span><strong>${state.best || '—'}</strong></div>
-  `;
+  const wrapper = createElementFromHTML(`<div class="game-card__body">
+    <div class="game-card__meta"><span>${text.attempts}: <strong>${state.moves}</strong></span><button type="button" class="mini-button" data-action="reset-memory">${text.reset}</button></div>
+    <div class="memory-board" role="group" aria-label="${language === 'es' ? 'Tablero de memoria' : 'Memory board'}"></div>
+    <p class="game-card__status" aria-live="polite">${state.status}</p><div class="score-row score-row--memory"></div>
+    <button type="button" class="mini-button mini-button--ghost" data-action="clear-score">${text.clearScore}</button>
+  </div>`);
+  const infoRow = wrapper.querySelector('.game-card__meta');
+  const board = wrapper.querySelector('.memory-board');
+  const status = wrapper.querySelector('.game-card__status');
+  const scoreRow = wrapper.querySelector('.score-row');
 
   function renderBoard() {
-    board.innerHTML = '';
-    state.deck.forEach((card) => {
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = `memory-card ${card.flipped || card.matched ? 'is-visible' : ''} ${card.matched ? 'is-matched' : ''}`;
-      button.textContent = card.flipped || card.matched ? card.symbol : '?';
+    board.innerHTML = state.deck.map((card) => {
       const cardLabel = card.matched
         ? `${text.matchedCard} ${card.symbol}`
         : card.flipped
           ? `${text.visibleCard} ${card.symbol}`
           : text.hiddenCard;
-      button.setAttribute('aria-label', cardLabel);
-      button.disabled = state.checkingPair || card.matched || card.flipped;
-      button.addEventListener('click', () => handleTurn(card.id));
-      board.appendChild(button);
-    });
+      return `<button type="button" class="memory-card ${card.flipped || card.matched ? 'is-visible' : ''} ${card.matched ? 'is-matched' : ''}" data-card-id="${card.id}" aria-label="${cardLabel}" ${state.checkingPair || card.matched || card.flipped ? 'disabled' : ''}>${card.flipped || card.matched ? card.symbol : '?'}</button>`;
+    }).join('');
+    board.querySelectorAll('[data-card-id]').forEach((button) => button.addEventListener('click', () => handleTurn(button.dataset.cardId)));
 
     infoRow.querySelector('strong').textContent = state.moves;
     scoreRow.innerHTML = `
@@ -179,9 +161,13 @@ export function createMemoryGame(language = 'es') {
   }
 
   infoRow.querySelector('[data-action="reset-memory"]').addEventListener('click', resetGame);
+  wrapper.querySelector('[data-action="clear-score"]').addEventListener('click', () => {
+    state.best = 0;
+    resetGameScore('memory');
+    renderBoard();
+    updateStatus(text.scoreCleared);
+  });
 
   renderBoard();
-  wrapper.append(infoRow, board, status, scoreRow);
-
   return wrapper;
 }

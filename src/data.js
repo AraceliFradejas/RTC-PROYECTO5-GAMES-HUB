@@ -68,7 +68,7 @@ export const translations = {
     aboutTitle: 'Un sitio para jugar, reírse y volver a probar.',
     aboutText:
       'Games Hub nació con una idea muy simple: que jugar no tenga que ser complicado ni frío. Aquí cada partida invita a relajarse, concentrarse y pasar un buen rato sin perder la personalidad. Un espacio de contraste, de color suave y de pequeñas victorias que hacen sonreír entre una tarea y otra.',
-    footerTitle: 'Sigueme / Follow me:',
+    footerTitle: 'Sígueme:',
     toggle: 'Switch to English',
   },
   en: {
@@ -89,7 +89,7 @@ export const translations = {
     aboutTitle: 'A place to play, laugh and come back for another round.',
     aboutText:
       'Games Hub was born from a simple idea: playing should not feel complicated or cold. Every round here invites you to relax, focus and enjoy a good moment without losing your personality. A space full of contrast, soft colours and small wins that make you smile between tasks.',
-    footerTitle: 'Follow me / Sigueme:',
+    footerTitle: 'Follow me:',
     toggle: 'Cambiar a español',
   },
 };
