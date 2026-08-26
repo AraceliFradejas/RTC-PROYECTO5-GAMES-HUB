@@ -41,18 +41,38 @@ El panel situado al principio de la página muestra un resumen de la actividad y
 ├── package-lock.json
 └── src
     ├── data.js
+    ├── components
+    │   ├── About.js
+    │   ├── Footer.js
+    │   ├── GamesSection.js
+    │   ├── Header.js
+    │   ├── Hero.js
+    │   └── dom.js
     ├── games
     │   ├── memory.js
+    │   ├── memoryState.js
     │   ├── rps.js
-    │   └── ticTacToe.js
+    │   ├── templates.js
+    │   ├── ticTacToe.js
+    │   └── translations.js
     ├── main.js
     ├── storage.js
     └── styles
-        ├── base.css
-        ├── footer.css
-        ├── games.css
-        ├── hero.css
+        ├── about.css
+        ├── buttons.css
+        ├── footer-meta.css
+        ├── footer-social.css
+        ├── game-cards.css
+        ├── globals.css
+        ├── header-brand.css
+        ├── header-navigation.css
+        ├── hero-intro.css
         ├── index.css
+        ├── memory.css
+        ├── panels.css
+        ├── rps.css
+        ├── summary.css
+        ├── tic-tac-toe.css
         └── responsive.css
 ```
 
@@ -83,13 +103,14 @@ npm run preview
 - Cambio de idioma sin perder los resultados guardados.
 - Distribución responsive en móvil, tablet y escritorio.
 - Navegación con teclado y mensajes de resultado anunciados mediante `aria-live`.
+- Tests de arquitectura que impiden superar 100 líneas por módulo o volver a mezclar estrategias de creación del DOM.
 
 ## Refactorización tras la revisión
 
 Se han aplicado todos los ajustes solicitados en la corrección:
 
 - `main.js` se redujo de 231 líneas a un punto de entrada de unas 50 líneas. La cabecera, el hero, las tarjetas de juegos, la sección informativa y el footer son ahora componentes independientes dentro de `src/components`.
-- La antigua hoja de estilos de 881 líneas se dividió por responsabilidad en `base.css`, `hero.css`, `games.css`, `footer.css` y `responsive.css`, coordinadas desde `styles/index.css`.
+- La antigua hoja de estilos de 881 líneas se dividió en módulos temáticos de menos de 100 líneas, coordinados desde `styles/index.css`.
 - Se unificó la construcción de interfaz: tanto la página como los juegos parten de plantillas HTML mediante el helper compartido `createElementFromHTML`; ya no se mezclan bloques creados manualmente con `createElement()` y otros con literales.
 - Memoria visual incorpora el botón **Borrar récord / Clear best score**, actualiza el panel superior y conserva por separado el reinicio de la partida.
 - El footer renderiza exclusivamente la nota y el encabezado correspondientes al idioma seleccionado.
@@ -163,16 +184,29 @@ The progress panel at the top of the page shows a summary and updates while you 
     │   └── dom.js
     ├── games
     │   ├── memory.js
+    │   ├── memoryState.js
     │   ├── rps.js
-    │   └── ticTacToe.js
+    │   ├── templates.js
+    │   ├── ticTacToe.js
+    │   └── translations.js
     ├── main.js
     ├── storage.js
     └── styles
-        ├── base.css
-        ├── footer.css
-        ├── games.css
-        ├── hero.css
+        ├── about.css
+        ├── buttons.css
+        ├── footer-meta.css
+        ├── footer-social.css
+        ├── game-cards.css
+        ├── globals.css
+        ├── header-brand.css
+        ├── header-navigation.css
+        ├── hero-intro.css
         ├── index.css
+        ├── memory.css
+        ├── panels.css
+        ├── rps.css
+        ├── summary.css
+        ├── tic-tac-toe.css
         └── responsive.css
 ```
 
@@ -203,13 +237,14 @@ npm run preview
 - Language changes without losing saved results.
 - Responsive layouts for mobile, tablet and desktop.
 - Keyboard navigation and result messages announced with `aria-live`.
+- Architecture tests that prevent modules from exceeding 100 lines or mixing DOM creation strategies again.
 
 ## Refactoring after the review
 
 All the changes requested in the project review have been implemented:
 
 - `main.js` was reduced from 231 lines to an entry point of approximately 50 lines. The header, hero, game cards, about section and footer are now independent components inside `src/components`.
-- The former 881-line stylesheet was divided by responsibility into `base.css`, `hero.css`, `games.css`, `footer.css` and `responsive.css`, coordinated through `styles/index.css`.
+- The former 881-line stylesheet was divided into focused modules of fewer than 100 lines, coordinated through `styles/index.css`.
 - Interface construction was standardised: both the page and the games now use HTML templates through the shared `createElementFromHTML` helper instead of mixing manual `createElement()` blocks with template literals.
 - Memory Match now includes a **Clear best score** button. It resets the stored record and updates the progress panel independently from the game reset.
 - The footer renders only the note and heading belonging to the currently selected language.
